@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #version 2.0 
 import logging
-import time
 from datetime import date, datetime
 from daemon import runner
 import MySQLdb
