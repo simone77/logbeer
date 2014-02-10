@@ -44,14 +44,14 @@ class Logbeer():
             time.sleep(self.delay)
 
 logbeer = Logbeer()
+#
 logger = logging.getLogger("Logbeer")
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler = logging.FileHandler("/var/log/logbeer.log")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-
+##
 daemon_runner = runner.DaemonRunner(logbeer)
-#This ensures that the logger file handle does not get closed during daemonization
 daemon_runner.daemon_context.files_preserve=[handler.stream]
 daemon_runner.do_action()
