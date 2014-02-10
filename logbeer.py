@@ -15,13 +15,32 @@ class Logbeer():
         self.stderr_path = '/dev/null'
         self.pidfile_path =  '/var/run/logbeer.pid'
         self.pidfile_timeout = 5
-        self.getTemp = True
+        self.getTemp = False
         self.temp = 0
            
     def run(self):
         while True:
-            #TODO insert a temperature get
-            try:#db query
+            try:#sensor polling
+                fi = open(self.path_sensor,'r')
+                lines = fi.readlines()
+                crcLine = lines[0]
+                tempLine = lines[1]
+                result_list = tempLine.split("=")
+                if crcLine.find("NO") > -1:
+                    logger.error("CRC error")
+                    self.getTemp = False
+                else:
+                    self.temp = float(result_list[-1].strip())/1000
+                    self.getTemp = True
+                    #logger.debug("Sensor found")
+                    #logger.debug("Temperature=%s" %(self.temp))
+            except IOError:
+                logger.error("Sensor not found")
+                print("Sensor not found")
+            except Exception as e:
+                logger.error(e.message)
+            ###db query
+            try:
                 db = MySQLdb.connect(host="localhost",  user="root", passwd="password",db="test")
                 cursor = db.cursor()
                 cursor.execute("SELECT * FROM Settings WHERE ID=0")
@@ -31,7 +50,7 @@ class Logbeer():
                 logger.debug("Correction=%s" %(correction))
                 if self.getTemp:
                     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    cursor.execute("INSERT INTO Logtemp(Data, Temp) VALUES(%s,%s)",(now, 50))#TODO fake temp
+                    cursor.execute("INSERT INTO Logtemp(Data, Temp) VALUES(%s,%s)",(now, self.temp))
                     db.commit()
                     db.close()
             except MySQLdb.Error as e:
