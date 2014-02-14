@@ -13,7 +13,7 @@ A simple temperature monitor for the beer fermentation, but also for many others
 ###Setup
 
 ```sh
-sudo apt-get update
-sudo apt-get install python-mysqldb python-daemon
-
+$ sudo apt-get update
+$ sudo apt-get install python-mysqldb python-daemon
+$ mysql -u root -p password test < setup.sql
 ```
