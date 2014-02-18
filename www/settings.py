@@ -10,7 +10,7 @@ form = cgi.FieldStorage()
 if(form):
     update_polling = form.getvalue("polling")
     update_correction = form.getvalue("correction")
-    db2 = MySQLdb.connect(host="localhost",  user="root", passwd="brewingbad",db="test")
+    db2 = MySQLdb.connect(host="localhost",  user="root", passwd="password",db="test")
     cursor = db2.cursor()
     cursor.execute("""UPDATE Settings set polling=%s, correction=%s where ID=0""",(update_polling,update_correction))
     db2.commit()
