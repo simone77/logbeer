@@ -16,4 +16,25 @@ A simple temperature monitor for the beer fermentation, but also for many others
 $ sudo apt-get update
 $ sudo apt-get install python-mysqldb python-daemon lighttpd
 $ mysql -u root -p password test < setup.sql
+$ sudo lighttpd-enable-mod cgi
+```
+Configure the webserver to enable python cgi
+
+```sh
+$ nano /etc/lighttpd/lighttpd.conf
+```
+
+```sh 
+index-file.names            = ( "index.php", "index.html" )
+static-file.exclude-extensions = ( ".php", ".pl", ".fcgi",".py" )
+```
+
+```sh                
+$ nano nano /etc/lighttpd/conf-enabled/10-cgi.conf  
+```
+
+```sh 
+cgi.assign      = (
+        ".py"  => "/usr/bin/python",
+)
 ```
