@@ -14,11 +14,11 @@ if(form):
     cursor = db2.cursor()
     cursor.execute("""UPDATE Settings set polling=%s, correction=%s where ID=0""",(update_polling,update_correction))
     db2.commit()
-    print("settings updated!")#TODO se update andato a buon fine
+    print("settings updated!")
     db2.close()
 
 
-db = MySQLdb.connect(host="localhost",  user="root", passwd="brewingbad",db="test")
+db = MySQLdb.connect(host="localhost",  user="root", passwd="password",db="test")
 cursor = db.cursor()
 cursor.execute("SELECT * from Settings")
 #print('Content-Type: text/html\n')
