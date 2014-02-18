@@ -8,7 +8,7 @@ import MySQLdb
 
 ##
 cgitb.enable() 
-db = MySQLdb.connect(host="localhost",  user="root", passwd="brewingbad",db="test")
+db = MySQLdb.connect(host="localhost",  user="root", passwd="password",db="test")
 serie = []
 cursor = db.cursor()
 cursor.execute("SELECT * FROM Logtemp")
