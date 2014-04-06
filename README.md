@@ -21,11 +21,11 @@ $ sudo lighttpd-enable-mod cgi
 Configure the webserver to enable python cgi
 
 ```sh
-$ nano /etc/lighttpd/lighttpd.conf
+$ sudo nano /etc/lighttpd/lighttpd.conf
 ```
 
 ```sh 
-index-file.names            = ( "index.php", "index.html" )
+index-file.names            = ( "index.php", "index.html", "index.py" )
 static-file.exclude-extensions = ( ".php", ".pl", ".fcgi",".py" )
 ```
 
