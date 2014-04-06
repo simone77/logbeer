@@ -30,7 +30,7 @@ static-file.exclude-extensions = ( ".php", ".pl", ".fcgi",".py" )
 ```
 
 ```sh                
-$ nano nano /etc/lighttpd/conf-enabled/10-cgi.conf  
+$ sudo nano /etc/lighttpd/conf-enabled/10-cgi.conf  
 ```
 
 ```sh 
